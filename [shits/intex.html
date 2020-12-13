@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Movie Reviewer</title>
+    <link rel="stylesheet" href="css/master.css">
+	<script type="text/javascript" src="js/index.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  </head>
+
+  <body>
+
+    <div class="login_ui_container">
+      <div id="login_ui_id" class="userCredentials">
+
+		<p id="logo_id">Movie Reviewer</p>
+		
+        <form id="form_id">
+          <div id="username_wrapper" class="input_wrapper">
+            <input id="username_input_id" class="input" type="text" name="username_input" placeholder="Username">
+          </div>
+          <div id="password_wrapper" class="input_wrapper">
+            <input id="password_input_id" class="input" type="password" name="password_input" placeholder="Password">
+            <div id="login_btn_id" class="icon_wrapper" onclick="loginBtn()">
+              <span class="done_btn"></span>
+              <img src="https://img.icons8.com/metro/50/ffffff/checkmark.png">
+            </div>
+          </div>
+        </form>
+        <p id="signUp_btn_id" class="sign_up" onclick="moveDown()">You don't have an account? Sign Up</p>
+      </div>
+	</div>
+
+  </body>
+
+
+</html>
