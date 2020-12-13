@@ -44,13 +44,7 @@ $conn=db_connect();
 		}
 
 		if(!empty($errors)){
-      //yparxoun errors                  width:24rem;text-align: center;
-			//echo "<h2>Exeis ta parakatw errors</h2>";
-		//	foreach($errors as $e){
-        /*	echo "<p class='errors'>$e</p>";*/
-        //echo '<script>alert("Welcome to Geeks for Geeks")</script>'; 
-				//echo " <script type='text/javascript'> alert(\"$errors[0]\"); </script>	";
-        
+      
         echo "
 				
 				<div class='alerts3 ggg alerts-danger' >
@@ -65,8 +59,16 @@ $conn=db_connect();
 		
 		}
 		else{
-			$sql = "INSERT INTO users(username, password, email)
-			VALUES ('$fname' , '$pass' , '$email')";
+			$ids = "SELECT id FROM users ORDER BY id DESC LIMIT 1";
+			$rs = $conn->query($ids);
+			
+			if($row = $rs->fetch_assoc()) {
+				$nextAvailableId = $row['id'] + 1;
+			}
+			
+
+			$sql = "INSERT INTO users(id,username, password, email)
+			VALUES ('$nextAvailableId','$fname' , '$pass' , '$email')";
 
 			$result = $conn->query($sql);
 			$_SESSION['user']=$fname;
