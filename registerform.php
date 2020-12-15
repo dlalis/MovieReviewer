@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE)
   <head>
     <meta charset="utf-8">
     <title>Movie Reviewer</title>
-    <link rel="stylesheet" href="css/master1.css">
+    <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
     
     <script type="text/javascript" src="js/main.js"></script>
@@ -22,34 +22,27 @@ if (session_status() == PHP_SESSION_NONE)
   <div id="formContent">
     <!-- Tabs Titles -->
 
-    <br>
     <!-- Login Form -->
     <form id="form_id" action="" method="POST"> 
 
          <div id="username_wrapper" class="input_wrapper">
-      		    <input id="reg_username_input_id" class="input" type="text" name="name" value="<?php if(isset($_POST['name'])) echo $_POST['name'];?>" placeholder="Username.." onclick="myFunctionName();" onchange="myFunctionName();" required>
+      		    <input id="reg_username_input_id" class="input" type="text" name="name" value="<?php if(isset($_POST['name'])) echo $_POST['name'];?>" placeholder="Username" onclick="myFunctionName();" onchange="myFunctionName();" required>
          </div>
-          <div id="email_wrapper" class="input_wrapper">
+          <!-- <div id="email_wrapper" class="input_wrapper">
             <input id="email_input_id" class="input" type="text" name="email_input" placeholder="Email" value="<?php if(isset($_POST['email_input'])) echo $_POST['email_input']; ?>" onclick="myFunctionEmail();" onchange="myFunctionEmail();" required>
-          </div>
+          </div> -->
 
           <div id="password_wrapper" class="input_wrapper">
-           <input id="reg_password_input_id" class="test" type="password" name="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'];?>" placeholder="Password.." onclick="myFunctionPass();" onchange="myFunctionPass();" required>
+           <input id="reg_password_input_id" class="test" type="password" name="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'];?>" placeholder="Password" onclick="myFunctionPass();" onchange="myFunctionPass();" required>
           </div>
 
           <div id="password1_wrapper" class="input_wrapper">
-             <input id="password_check_input_id" class="input" type="password" name="conf_pass" value="<?php if(isset($_POST['conf_pass'])) echo $_POST['conf_pass'];?>" placeholder="Cofirm Password.."onclick="myFunctionPass();" onchange="myFunctionPass();" required> 
+             <input id="password_check_input_id" class="input" type="password" name="conf_pass" value="<?php if(isset($_POST['conf_pass'])) echo $_POST['conf_pass'];?>" placeholder="Cofirm Password"onclick="myFunctionPass();" onchange="myFunctionPass();" required> 
           </div>
 
           <br1><br>
-          <input type="submit" class="fadeIn fourth" name="submit" value="Register">  
+          <input type="submit" class="fadeIn" name="submit" value="Register">  
     </form>
-    <br>
- 
-  
-          
-         
-    <br>  
   </div>
 </div>
 
