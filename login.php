@@ -12,10 +12,6 @@ if (session_status() == PHP_SESSION_NONE)
     <script type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
-
-  <p id="logo_id" style="cursor: default">Movie Reviewer</p>
-
-
    <div class="wrapper">
   <div id="formContent">
     <!-- Tabs Titles -->

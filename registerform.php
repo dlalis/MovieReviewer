@@ -7,16 +7,11 @@ if (session_status() == PHP_SESSION_NONE)
   <head>
     <meta charset="utf-8">
     <title>Movie Reviewer</title>
-    <link rel="stylesheet" href="css/style.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  
-    
+    <link rel="stylesheet" href="css/style.css">    
     <script type="text/javascript" src="js/main.js"></script>
 
   </head>
   <body>
-
-  <p id="logo_id" style="cursor: default">Movie Reviewer</p>
-
 
    <div class="wrapper">
   <div id="formContent">
