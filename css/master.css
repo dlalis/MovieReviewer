@@ -7,10 +7,10 @@ body{
     /*background-color: #191A17;*/
     /* background: radial-gradient(#377973, #65bbb4, #4a817d */
     /* background-image: url("bg2.jpg"); */
-    background: radial-gradient(#535551, #6e7267, #6e7267);
+    /* background: radial-gradient(#535551, #6e7267, #6e7267);
     background-repeat: no-repeat, repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: cover; */
     position: relative;
   }
 
