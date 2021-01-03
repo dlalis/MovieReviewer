@@ -6,8 +6,9 @@ if (session_status() == PHP_SESSION_NONE)
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Reviewer</title>
-    <link rel="stylesheet" href="css/style.css">    
+    <link rel="stylesheet" href="css/login.css">    
     <script type="text/javascript" src="js/main.js"></script>
 
   </head>
@@ -18,7 +19,7 @@ if (session_status() == PHP_SESSION_NONE)
     <!-- Tabs Titles -->
 
     <!-- Login Form -->
-    <form id="form_id" action="" method="POST"> 
+    <form id="form_id" action="./home.html" method="POST"> 
 
          <div id="username_wrapper" class="input_wrapper">
       		    <input id="reg_username_input_id" class="input" type="text" name="name" value="<?php if(isset($_POST['name'])) echo $_POST['name'];?>" placeholder="Username" onclick="myFunctionName();" onchange="myFunctionName();" required>
