@@ -47,7 +47,7 @@ $conn=db_connect();
       
         echo "
 				
-				<div class='alerts3 ggg alerts-danger' >
+				<div class='alerts alerts-danger'  style='width:25rem;text-align: center;'>
 					<strong> $errors[0] </strong>
 				</div>
         
@@ -62,19 +62,23 @@ $conn=db_connect();
 			$ids = "SELECT id FROM users ORDER BY id DESC LIMIT 1";
 			$rs = $conn->query($ids);
 			
+			$nextAvailableId  = 1;
+			
 			if($row = $rs->fetch_assoc()) {
 				$nextAvailableId = $row['id'] + 1;
 			}
 			
+			//encrypt the password before saving in the database
+			$password = md5($pass);
 
-			$sql = "INSERT INTO users(id,username, password, email)
-			VALUES ('$nextAvailableId','$fname' , '$pass' , '$email')";
+			$sql = "INSERT INTO users(id,username, password, email, role)
+			VALUES ('$nextAvailableId','$fname' , '$password' , '$email' , 0)";
 
 			$result = $conn->query($sql);
 			$_SESSION['user']=$fname;
-	//		$_SESSION['id'] = $row['id'];
+		//	$_SESSION['id'] = $row['id'];
 		//	echo "Well done!!!<br>";
-			header("Location: user.php?=registered&successfull");
+			header("Location: home.php?=registered&successfull");
 			die();
 		}
 	}

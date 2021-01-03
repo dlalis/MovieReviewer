@@ -17,7 +17,7 @@ if (session_status() == PHP_SESSION_NONE)
     <!-- Tabs Titles -->
 
     <!-- Login Form -->
-    <form id="form_id" action="./home.html" method="POST"> 
+    <form id="form_id" action="" method="POST"> 
        <!-- <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
       <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">-->
      <div id="username_wrapper" class="input_wrapper">
@@ -27,7 +27,7 @@ if (session_status() == PHP_SESSION_NONE)
           <div id="password_wrapper" class="input_wrapper">
             <input id="password_input_id" class="input" type="password" name="password_input" placeholder="Password" required>
           </div>
-          <input type="submit" class="fadeIn" name="submit" value="Log In">
+          <input type="submit" class="fadeIn fourth" name="submit" value="Log In">
     </form>
     <br>
     
@@ -35,7 +35,7 @@ if (session_status() == PHP_SESSION_NONE)
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="registerform.php">You dont have an account? Sign In</a>
+      <a class="underlineHover" href="register.php">You dont have an account? Sign In</a>
     </div>
 
   </div>

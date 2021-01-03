@@ -19,14 +19,14 @@ if (session_status() == PHP_SESSION_NONE)
     <!-- Tabs Titles -->
 
     <!-- Login Form -->
-    <form id="form_id" action="./home.html" method="POST"> 
+    <form id="form_id" action="" method="POST"> 
 
          <div id="username_wrapper" class="input_wrapper">
       		    <input id="reg_username_input_id" class="input" type="text" name="name" value="<?php if(isset($_POST['name'])) echo $_POST['name'];?>" placeholder="Username" onclick="myFunctionName();" onchange="myFunctionName();" required>
          </div>
-          <!-- <div id="email_wrapper" class="input_wrapper">
+          <div id="email_wrapper" class="input_wrapper">
             <input id="email_input_id" class="input" type="text" name="email_input" placeholder="Email" value="<?php if(isset($_POST['email_input'])) echo $_POST['email_input']; ?>" onclick="myFunctionEmail();" onchange="myFunctionEmail();" required>
-          </div> -->
+          </div> 
 
           <div id="password_wrapper" class="input_wrapper">
            <input id="reg_password_input_id" class="test" type="password" name="pass" value="<?php if(isset($_POST['pass'])) echo $_POST['pass'];?>" placeholder="Password" onclick="myFunctionPass();" onchange="myFunctionPass();" required>
@@ -37,7 +37,7 @@ if (session_status() == PHP_SESSION_NONE)
           </div>
 
           <br1><br>
-          <input type="submit" class="fadeIn" name="submit" value="Register">  
+          <input type="submit" class="fadeIn fourth" name="submit" value="Register">  
     </form>
   </div>
 </div>
