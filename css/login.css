@@ -3,11 +3,25 @@
     font-family: painter;
     src: url(Painter.ttf);
   }
+
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-}
+  font-family: 'Inter', sans-serif; 
+   /* background-color: #eeeff1; */
+   background: url(bg.jpg) no-repeat center ;
+   background-size: cover;
+  }
   
+  .alerts-danger-error{
+    color:#e2221f;
+    background-color:#b9b7b9;
+    border-color:#ebccd1;
+    display: inline-block;
+    margin: 5px 20px 20px 20px;
+    
+  }
+
   /* BASIC */
   .alerts2{
     position: fixed;left: 44%; top: 75%;
@@ -111,6 +125,16 @@ body {
     /* box-shadow: 0 4px 10px 2px rgba(0,0,0,0.3); */
     text-align: center;
   }
+
+  #formContentReg {
+    border-radius: 6px;
+    width: 350px;
+    position: relative;
+    padding: 5px 0 0 0;
+    /* box-shadow: 0 4px 10px 2px rgba(0,0,0,0.3); */
+    text-align: center;
+  }
+
   
   #formFooter {
     padding: 25px;
@@ -256,6 +280,10 @@ body {
     width: 100%;
   }
   
+  .signup{
+    color: #000000;
+  }
+
   #reg_password_input_id text1 {
     font: small-caption;
     font-size: 16px;
