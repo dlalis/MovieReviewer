@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/home.css?rnd=23">
     <script type='text/javascript' src='config.js'></script>
 </head>
 <body>

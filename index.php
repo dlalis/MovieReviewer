@@ -10,7 +10,7 @@ $conn = db_connect();
 	if(!isset($_POST['submit'])){
 		//if user has already logged in,redirect him to home page
 		if(isset($_SESSION['user'])){	
-			 header("Location: user.php");
+			 header("Location: home.php");
 		}
 		//else user must log in
 		include "login.php";	
