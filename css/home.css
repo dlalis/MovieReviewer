@@ -22,6 +22,8 @@ main {
 .sidenav .sidebar_wrapper {
     padding-left: 80px;
     padding-top: 80px;
+    /* padding-bottom: 80px; */
+    
     max-width: 300px;
 }
 
@@ -78,6 +80,9 @@ main {
     outline: none;
     border: none;
     background: none;
+
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
 }
 
 .sidenav .user_options button:hover {
@@ -205,6 +210,8 @@ main .content .user_movie_list .movie_poster {
     width: 100px;
 
     position: relative;
+    float: left;
+    margin-right: 15px;
 
     border-radius: 4px;
     background-color: #cecece;
@@ -218,15 +225,17 @@ main .content .user_movie_list .movie_poster img {
     object-fit: cover;
 }
 
-main .content .user_movie_list .movie_info {
-    position: absolute;
-    top: 0;
-    left: 140px;
+main .content .user_movie_list .movie_info .review_btn {
+    border-radius: 4px;
+    border: 1px solid #444444;
+    width: 100px;
 }
 
 main .content .user_movie_list .movie_info h4 {
     margin-top: 2px;
+    margin-bottom: 6px;
 }
+
 
 .short_plot {
     overflow: hidden;
@@ -245,10 +254,12 @@ main .content .user_movie_list .movie_info button {
     font-weight: 700;
     font-family: 'Inter', sans-serif;
 
+    outline: none;
+
     cursor: pointer;
 }
 
-main .content .no_movies {
+main .content #no_movies {
     width: 100%;
     text-align: center;
     font-size: 17px;
