@@ -25,6 +25,8 @@ main {
 .sidenav .sidebar_wrapper {
     padding-left: 80px;
     padding-top: 80px;
+    /* padding-bottom: 80px; */
+    
     max-width: 300px;
 }
 
@@ -81,6 +83,9 @@ main {
     outline: none;
     border: none;
     background: none;
+
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
 }
 
 .sidenav .user_options button:hover {
@@ -98,17 +103,17 @@ main .content {
 
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 main .content .search_bar {
     width: 100%;
-    height: 40px;
+    height: 50px;
 
     overflow: hidden;
 
-    border: 1px rgba(206, 206, 206, 0.7) solid;
+    /*border: 1px rgba(206, 206, 206, 0.7) solid;
     border-radius: 4px;
+    */
     position: relative;
 
     margin-bottom: 10px;
@@ -145,7 +150,7 @@ main .content .search_bar #clear {
     visibility: hidden;
     content: url(/css/cancel.svg);
     height: 25px;
-    margin-top: 9px;
+    margin-top: 14px;
     margin-left: 10px;
 
     position: absolute;
@@ -158,6 +163,7 @@ main .content .search_bar input {
     width: -webkit-fill-available;
     height: 100%;
     margin: 0 40px ;
+    font-size: 15px;
 }
 
 main .content .search_bar input:focus {
@@ -207,21 +213,35 @@ main .content .user_movie_list .movie_poster {
     height: 130px;
     width: 100px;
 
+    position: relative;
+    float: left;
+    margin-right: 15px;
+
     border-radius: 4px;
     background-color: #cecece;
+    overflow: hidden;
 }
 
-main .content .user_movie_list .movie_info {
-    position: absolute;
-    top: 0;
-    left: 140px;
+main .content .user_movie_list .movie_poster img {
+    height: 100%;
+    width: 100%;
+
+    object-fit: cover;
+}
+
+main .content .user_movie_list .movie_info .review_btn {
+    border-radius: 4px;
+    border: 1px solid #444444;
+    width: 100px;
 }
 
 main .content .user_movie_list .movie_info h4 {
     margin-top: 2px;
+    margin-bottom: 6px;
 }
 
-main .content .user_movie_list .movie_info p {
+
+.short_plot {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -238,7 +258,16 @@ main .content .user_movie_list .movie_info button {
     font-weight: 700;
     font-family: 'Inter', sans-serif;
 
+    outline: none;
+
     cursor: pointer;
+}
+
+main .content #no_movies {
+    width: 100%;
+    text-align: center;
+    font-size: 17px;
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 850px){

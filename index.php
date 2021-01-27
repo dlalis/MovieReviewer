@@ -40,14 +40,18 @@ $errors=array();
 			}
 			else{
 				//taking the user role , 1 for admin , 0 for users
-				$sql = "SELECT role FROM users WHERE username='$fname' LIMIT 1";
+
+				$sql = "SELECT * FROM users WHERE username = '$fname' LIMIT 1";
 				$result = $conn->query($sql);
 
-				if($result -> num_rows > 0){
-					$role = $result;
-				}
+				if($result->num_rows > 0){
+					while($row = $result->fetch_assoc()){
+						$urole = $row["role"];
+					}
 
-				$_SESSION['role'] = $role;
+				}
+				
+				$_SESSION['role'] = $urole;
 				$_SESSION['user'] = $fname;
 
 			header("Location: home.php");

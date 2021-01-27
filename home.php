@@ -28,31 +28,64 @@ if (session_status() == PHP_SESSION_NONE)
                     <?php 
 					if(isset($_SESSION['user']))
 						echo "<p> Username: " . $_SESSION['user'] ."</p>";
-					
-					if(isset($_SESSION['role']))
-						if($_SESSION['role'] === 0)
+                    
+					if(isset($_SESSION['role'])){
+                        $role = $_SESSION['role'];
+						if($role == 0)
 							echo "<p>Role: User </p>";
 						else
 							echo "<p>Role: Administrator </p>";
-						
+                    }
+                    
+                    if($role == 1)
+                        echo ' 
+                                <div class="user_options">
+                                     <button onclick="deleteUser()">Delete User</button>
+                                     <button onclick="deleteUserMovie()">Delete User Watched List</button>
+                                     <button onclick="deleteUserReview()">Delete User Review List</button>
+                                </div>';
+
 					?>
                 </div>
                 <div class="user_options">
-                    <button>Button1</button>
-                    <button>Button2</button>
-                    <button>Button3</button>
-					<?php 
-						echo "<button> <a href=\"includes/logout_inc.php\"> Log Out </a></button>";
-					?>
+                    <button onclick="goToWatched()">Watched List</button>
+                    <button onclick="goToReviews()">My Reviews</button>
+                    <button onclick="logOut()">Log Out</button>
                 </div>
-            </div>  
+            </div> 
+            <script>
+                const goToReviews = () => {
+                    fetch('./list.html')
+                    .then(resp => resp.text() )
+                    .then(include => {
+                        document.querySelector('#included').innerHTML = ""
+                        document.querySelector('#included').innerHTML = include 
+                    })
+                }
+
+                const goToWatched = () => {
+                    fetch('./watched.html')
+                    .then(resp => resp.text() )
+                    .then(include => {
+                        document.querySelector('#included').innerHTML = ""
+                        document.querySelector('#included').innerHTML = include 
+                    })   
+                }
+
+                const logOut = () => {
+                    window.location.replace("./includes/logout_inc.php")
+                }
+            </script> 
             </section>
-        <section class="content">
+            <section class="content">
             <div class="content_wrapper">
                 <div class="flex">
                     <div class="search_bar">
                         <div id="clear" onclick="clear_bar()"/></div>
-                        <input id="input_field" type="text" oninput="call_api(this.value)" placeholder="Search for a movie, series or an episode.."/>
+                            <input id="input_field" 
+                                type="text" name="search"
+                                oninput="call_api(this.value)" 
+                                placeholder="Search for a movie, series or an episode.."/>
                     </div>
                     <button onclick="toggle_sidebar()">
                         <div></div>
@@ -76,16 +109,17 @@ if (session_status() == PHP_SESSION_NONE)
                     }
 
                     const call_api = search_term => {
+                        document.getElementById('clear').style.visibility = "visible"
                         if (search_term === "") {
                             clear_bar()
                             return
                         }
+
                         fetch(`http://www.omdbapi.com/?s=${search_term}&apikey=${config.omdb_key}`)
                         .then(x => x.json() )
                         .then(y => {
-                            console.log(y)
+                            // console.log(y)
                             
-                            document.getElementById('clear').style.visibility = "visible"
                             document.getElementById('search_results').innerHTML = ""
                             
                             if(y.Response === "True"){
@@ -93,19 +127,69 @@ if (session_status() == PHP_SESSION_NONE)
 
                                 y.Search.map(movie => {
                                     const p = document.createElement('p')
-                                    p.innerHTML = `${movie.Title} - ${movie.Year}`
+                                    p.innerHTML = `${movie.Title} (${movie.Year})`
 
                                     const div = document.createElement('div')
+                                    div.onclick = () => {
+                                        get_movie(movie.imdbID)
+                                        document.getElementById('search_results').style.display = "none"
+                                        
+                                        if(document.getElementById('included').firstElementChild.id === 'no_movies'){
+                                            document.getElementById('included').innerHTML = "" 
+                                        }
+                                    }
                                     div.appendChild(p)
-
                                     document.getElementById('search_results').appendChild(div)
                                 })
                             }else {
                                 document.getElementById('search_results').style.display = "none"
                             }
                         }).catch(error => {
-                            console.log(error);
+                            console.warn("ERROR: ",error);
                         })
+                    }
+
+                    const get_movie = id => {
+                        fetch(`http://www.omdbapi.com/?i=${id}&plot=full&apikey=${config.omdb_key}`)
+                        .then(x => x.json() )
+                        .then(y => {
+                            console.log(y);
+
+                            const info = document.createElement('div')
+                            info.innerHTML = movie_info(y.Title, y.imdbID, y.Year, y.Plot, y.Poster, y.Genre, y.imdbRating)
+
+                            document.getElementById('included').prepend(info)
+                        }).catch(error => {
+                            console.warn("ERROR: ",error);
+                        })
+                    }
+
+                    const review_clk = id => {
+                        value = encodeURIComponent(id);
+                        document.location.search = `id=${value}`;
+                    }
+
+                    const movie_info = (title, id, year, plot, poster , genre, rate) => {
+                        return `<div class="user_movie_list">
+                                    <div class="movie">
+                                        <div class="movie_poster">
+                                            <img src="${poster}" alt="poster"></img>
+                                        </div>
+                                        <div class="movie_info">
+                                            <h4>${title} (${year})</h4>
+
+                                            <a>${genre}</a>
+                                            <a> <h5>${rate} / 10 </h5> </a>
+
+                                            <button class="review_btn" onclick="review_clk('${id}')">Review it!</button>
+                                            
+
+                                            <p class="short_plot">${plot}</p>
+                                            <button onclick="this.previousElementSibling.classList.toggle('short_plot')">see more</button>
+                                            <hr/>
+                                        </div>
+                                    </div>
+                                </div>`
                     }
                 </script>
 
@@ -113,64 +197,8 @@ if (session_status() == PHP_SESSION_NONE)
                     <div id="search_results"></div>
                 </div>
 
-                <div class="user_movie_list">
-                    <div class="movie">
-                        <div class="movie_poster"></div>
-                        <div class="movie_info">
-                            <h4>Movie Title</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus minima autem eius sit laudantium enim suscipit, nobis nisi maiores rem, consequuntur culpa cumque dignissimos iste ratione, voluptas nesciunt aperiam porro?</p>
-                            <button>see more</button>
-                            <hr/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user_movie_list">
-                    <div class="movie">
-                        <div class="movie_poster"></div>
-                        <div class="movie_info">
-                            <h4>Movie Title</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus minima autem eius sit laudantium enim suscipit, nobis nisi maiores rem, consequuntur culpa cumque dignissimos iste ratione, voluptas nesciunt aperiam porro?</p>
-                            <button>see more</button>
-                            <hr/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user_movie_list">
-                    <div class="movie">
-                        <div class="movie_poster"></div>
-                        <div class="movie_info">
-                            <h4>Movie Title</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus minima autem eius sit laudantium enim suscipit, nobis nisi maiores rem, consequuntur culpa cumque dignissimos iste ratione, voluptas nesciunt aperiam porro?</p>
-                            <button>see more</button>
-                            <hr/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user_movie_list">
-                    <div class="movie">
-                        <div class="movie_poster"></div>
-                        <div class="movie_info">
-                            <h4>Movie Title</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus minima autem eius sit laudantium enim suscipit, nobis nisi maiores rem, consequuntur culpa cumque dignissimos iste ratione, voluptas nesciunt aperiam porro?</p>
-                            <button>see more</button>
-                            <hr/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user_movie_list">
-                    <div class="movie">
-                        <div class="movie_poster"></div>
-                        <div class="movie_info">
-                            <h4>Movie Title</h4>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus minima autem eius sit laudantium enim suscipit, nobis nisi maiores rem, consequuntur culpa cumque dignissimos iste ratione, voluptas nesciunt aperiam porro?</p>
-                            <button>see more</button>
-                            <hr/>
-                        </div>
-                    </div>
+                <div id="included">
+                    <p id="no_movies">You don't have any movies listed yet. 😔</p>
                 </div>
             </div>
         </section>
